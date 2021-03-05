@@ -12,7 +12,8 @@
 * Make sure your code runs with `nodemon`
   * Do you get an error that looks like "xyz module is not found"? This is because originally, we forgot to npm install a module. This might happen for things that you've globally installed when we originally installed it (with the -g flag). Run the following command for each module you're missing:
   `npm install xyz`
-* git add, commit, and push all your code to github! 
+* This time we are checking in the `config` folder to github, so remove it from your `.gitignore` - but be sure that you remove any instance where it may have your username and password!
+* git `add`, `commit`, and `push` all your code to github! 
 
 ### Get a Heroku account and install the CLI tool!
 
@@ -46,7 +47,13 @@ We'll have the ability to create free applications using Heroku, but with limita
 
 ### To start:
 
-* In your `index.js` file, where you get your server started, include the port number in your app.listen function. Example:
+* Create a `Procfile` in the root of your Node application
+  * In terminal, run `touch Procfile`. Must be called with a capitol P
+  * make sure it is named "Procfile" (no extention)
+  * make sure your Procfile is in the same folder as your index.js file
+  * in terminal type `echo "web: node server.js" >> Procfile`
+
+* In your `server.js` file, where you get your server started, include the port number in your app.listen function. Example:
 
 ```js
 app.listen(process.env.PORT || 3000)
@@ -96,18 +103,10 @@ You may notice that while you have a valid URL and the site is deployed, your si
 
 * In terminal, install the add-on for postgres: `heroku addons:create heroku-postgresql:hobby-dev`
 
-We need to setup our `config/config.json` on heroku, so lets open up a `bash` shell that connects directly to the heroku machine
-* `heroku run bash`
-
-Take note of how our terminal window has changed!
-
-We're no longer running commands on our local machine, but on **heroku** itself!
-
-![bash](assets/bash.png)
-
-* To setup sequelize on heroku, run `sequelize init`
+* To setup sequelize on heroku, run `heroku run sequelize init`
 
 * Make sure your production variables in `config/config.json` are set like this (pay attention to the production setting).
+
 
 **config/config.json**
 ```js
@@ -122,10 +121,13 @@ We're no longer running commands on our local machine, but on **heroku** itself!
   }
 }
 ```
+* Add and commit your changes to git, then push your changes to heroku using `git push heroku main`
+
+* So that we don't have to deal with configuring [SSL](https://www.globalsign.com/en/ssl-information-center/what-is-an-ssl-certificate), we need to add one more heroku config variable: `heroku config:set PGSSLMODE=no-verify`
+
 * Now run your migrations by typing in terminal `sequelize db:migrate` and you should have all your tables set up in a heroku hosted database
 
 
-* Now you can type `exit` to exit the heroku `bash` instance and return to your local machine's shell
 * If you need to run any one-off commands, like running seeder files, simply type `heroku run` followed by the command you want from your local terminal
 
 * Try opening your app now, with the command `heroku open` or, simply visit the website in your browser.
