@@ -103,8 +103,6 @@ You may notice that while you have a valid URL and the site is deployed, your si
 
 * In terminal, install the add-on for postgres: `heroku addons:create heroku-postgresql:hobby-dev`
 
-* To setup sequelize on heroku, run `heroku run sequelize init`
-
 * Make sure your production variables in `config/config.json` are set like this (pay attention to the production setting).
 
 
