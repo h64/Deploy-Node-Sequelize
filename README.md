@@ -103,8 +103,6 @@ You may notice that while you have a valid URL and the site is deployed, your si
 
 * In terminal, install the add-on for postgres: `heroku addons:create heroku-postgresql:hobby-dev`
 
-* To setup sequelize on heroku, run `heroku run sequelize init`
-
 * Make sure your production variables in `config/config.json` are set like this (pay attention to the production setting).
 
 
@@ -125,7 +123,7 @@ You may notice that while you have a valid URL and the site is deployed, your si
 
 * So that we don't have to deal with configuring [SSL](https://www.globalsign.com/en/ssl-information-center/what-is-an-ssl-certificate), we need to add one more heroku config variable: `heroku config:set PGSSLMODE=no-verify`
 
-* Now run your migrations by typing in terminal `sequelize db:migrate` and you should have all your tables set up in a heroku hosted database
+* Now run your migrations by typing in terminal `heroku run sequelize db:migrate` and you should have all your tables set up in the heroku hosted database
 
 
 * If you need to run any one-off commands, like running seeder files, simply type `heroku run` followed by the command you want from your local terminal
